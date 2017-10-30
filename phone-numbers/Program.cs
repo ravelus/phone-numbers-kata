@@ -21,12 +21,13 @@ namespace PhoneNumbers
             {
                 var rootNode = new PhoneNumberTree
                 {
-                    Node = i
+                    Node = i,
+                    NodeDepth = 1
                 };
 
                 var calculator = new PhoneNumberCalculator();
 
-                calculator.GetChildrenPhoneNumbersFor(rootNode, 1);
+                calculator.GetChildrenPhoneNumbersFor(rootNode);
 
                 totalNumbers += calculator.GetTotal();
             }

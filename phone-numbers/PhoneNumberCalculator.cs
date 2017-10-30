@@ -14,10 +14,9 @@ namespace PhoneNumbers
             return _totalNumbers;
         }
 
-        public void GetChildrenPhoneNumbersFor(
-            PhoneNumberTree current, int currentLength)
+        public void GetChildrenPhoneNumbersFor(PhoneNumberTree current)
         {
-            if (currentLength >= PHONE_NUMBER_LENGTH)
+            if (current.NodeDepth >= PHONE_NUMBER_LENGTH)
             {
                 _totalNumbers++;
                 PrintPhoneNumber(current);
@@ -30,8 +29,8 @@ namespace PhoneNumbers
             if (current.Children == null)
                 return;
 
-            GetChildrenPhoneNumbersFor(current.Children.Item1, currentLength + 1);
-            GetChildrenPhoneNumbersFor(current.Children.Item2, currentLength + 1);
+            GetChildrenPhoneNumbersFor(current.Children.Item1);
+            GetChildrenPhoneNumbersFor(current.Children.Item2);
         }
 
         Tuple<PhoneNumberTree, PhoneNumberTree> CalculateChildren(PhoneNumberTree node)
@@ -45,12 +44,14 @@ namespace PhoneNumbers
                 new PhoneNumberTree
                 {
                     Parent = node,
-                    Node = children.Item1
+                    Node = children.Item1,
+                    NodeDepth = node.NodeDepth + 1
                 },
                 new PhoneNumberTree
                 {
                     Parent = node,
-                    Node = children.Item2
+                    Node = children.Item2,
+                    NodeDepth = node.NodeDepth + 1
                 });
         }
 
